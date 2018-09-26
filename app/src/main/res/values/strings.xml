@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MVP</string>
+    <string name="title_card_number">Number</string>
+    <string name="title_card_holder">Holder</string>
+    <string name="title_card_date">Date</string>
+    <string name="title_card_cvv">CVV</string>
+    <string name="action_send_card_data">Send</string>
+</resources>

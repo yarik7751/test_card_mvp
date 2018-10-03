@@ -1,4 +1,4 @@
-package by.yarik.task_mvp_credit_card.screens.card;
+package by.yarik.task_mvp_credit_card.model;
 
 import android.text.TextUtils;
 
@@ -9,6 +9,7 @@ public class CardModel {
     private static final String HOLDER_REGEX = "\\s+";
     private static final String DATE_REGEX = "/";
     private static final int DATE_MAX_LENGTH = 5;
+    private static final int CVV_MAX_LENGTH = 3;
 
     private String number;
     private String holder;
@@ -20,6 +21,9 @@ public class CardModel {
         this.holder = holder;
         this.date = date;
         this.cvv = cvv;
+    }
+
+    public CardModel() {
     }
 
     public String getNumber() {
@@ -54,7 +58,7 @@ public class CardModel {
         this.cvv = cvv;
     }
 
-    public boolean isCorrectNumber() {
+    public boolean isValidNumber() {
         return number.length() == NUMBER_VALID_LENGTH;
     }
 
@@ -77,5 +81,9 @@ public class CardModel {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public boolean isValidCvv() {
+        return cvv.length() == CVV_MAX_LENGTH;
     }
 }

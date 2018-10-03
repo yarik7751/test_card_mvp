@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import by.yarik.task_mvp_credit_card.R;
-import by.yarik.task_mvp_credit_card.screens.card.CardFragment;
+import by.yarik.task_mvp_credit_card.view.card.CardFragment;
 
 public class MainActivity extends AppCompatActivity {
 

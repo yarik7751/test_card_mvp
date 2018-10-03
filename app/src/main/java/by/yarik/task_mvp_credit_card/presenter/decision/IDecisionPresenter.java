@@ -1,7 +1,6 @@
-package by.yarik.task_mvp_credit_card.screens.decision;
+package by.yarik.task_mvp_credit_card.presenter.decision;
 
 import by.yarik.task_mvp_credit_card.screens.IBasePresenter;
-import by.yarik.task_mvp_credit_card.screens.IBaseView;
 
 public interface IDecisionPresenter extends IBasePresenter {
 }

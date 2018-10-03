@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
@@ -180,6 +181,16 @@ public class EditTextView extends LinearLayout {
 
     public EditText getEditText() {
         return editText;
+    }
+
+    public void setError(String error) {
+        if(TextUtils.isEmpty(error)) {
+            errorTextView.setVisibility(GONE);
+            errorTextView.setText(null);
+        } else {
+            errorTextView.setVisibility(VISIBLE);
+            errorTextView.setText(error);
+        }
     }
 
     public void setOnTextChangeListener(OnTextChangeListener onTextChangeListener) {

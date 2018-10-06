@@ -5,8 +5,10 @@ import android.view.View;
 import android.widget.Button;
 
 import by.yarik.task_mvp_credit_card.R;
+import by.yarik.task_mvp_credit_card.activity.MainActivity;
+import by.yarik.task_mvp_credit_card.view.decision.DecisionFragment;
 import by.yarik.task_mvp_credit_card.presenter.card.CardPresenter;
-import by.yarik.task_mvp_credit_card.screens.BaseFragment;
+import by.yarik.task_mvp_credit_card.view.BaseFragment;
 import by.yarik.task_mvp_credit_card.presenter.card.ICardPresenter;
 import by.yarik.task_mvp_credit_card.ui.EditTextView;
 import by.yarik.task_mvp_credit_card.ui.text.mask.CardDateMask;
@@ -43,7 +45,7 @@ public class CardFragment extends BaseFragment<ICardPresenter> implements ICardV
         setTextListener();
 
         btnSendCardData.setOnClickListener(view -> {
-
+            getPresenter().onSend();
         });
     }
 
@@ -66,22 +68,35 @@ public class CardFragment extends BaseFragment<ICardPresenter> implements ICardV
 
     @Override
     public void setNumberError(@StringRes int error) {
-        etCardNumber.setError(getString(error));
+        setError(etCardNumber, error);
     }
 
     @Override
     public void setHolderError(@StringRes int error) {
-        etCardHolder.setError(getString(error));
+        setError(etCardHolder, error);
     }
 
     @Override
     public void setDateError(@StringRes int error) {
-        etCardDate.setError(getString(error));
+        setError(etCardDate, error);
     }
 
     @Override
     public void setCvvError(@StringRes int error) {
-        etCardCvv.setError(getString(error));
+        setError(etCardCvv, error);
+    }
+
+    private void setError(EditTextView editTextView, @StringRes int error) {
+        if(error == 0) {
+            editTextView.setError(null);
+        } else {
+            editTextView.setError(getString(error));
+        }
+    }
+
+    @Override
+    public void openDecisionFragment(int type) {
+        ((MainActivity) getActivity()).setCurrentFragment(DecisionFragment.newInstance(type), true);
     }
 
     /**

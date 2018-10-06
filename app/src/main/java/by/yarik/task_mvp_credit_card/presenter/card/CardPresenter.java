@@ -1,8 +1,9 @@
 package by.yarik.task_mvp_credit_card.presenter.card;
 
 import by.yarik.task_mvp_credit_card.R;
+import by.yarik.task_mvp_credit_card.anotation.DecisionType;
 import by.yarik.task_mvp_credit_card.model.CardModel;
-import by.yarik.task_mvp_credit_card.screens.BasePresenter;
+import by.yarik.task_mvp_credit_card.presenter.BasePresenter;
 import by.yarik.task_mvp_credit_card.view.card.ICardView;
 
 public class CardPresenter extends BasePresenter<ICardView> implements ICardPresenter {
@@ -19,6 +20,8 @@ public class CardPresenter extends BasePresenter<ICardView> implements ICardPres
         cardModel.setNumber(number);
         if(!cardModel.isValidNumber()) {
             getView().setNumberError(R.string.default_error);
+        } else {
+            getView().setNumberError(0);
         }
     }
 
@@ -27,6 +30,8 @@ public class CardPresenter extends BasePresenter<ICardView> implements ICardPres
         cardModel.setHolder(holder);
         if(!cardModel.isValidHolder()) {
             getView().setHolderError(R.string.default_error);
+        } else {
+            getView().setHolderError(0);
         }
     }
 
@@ -35,6 +40,8 @@ public class CardPresenter extends BasePresenter<ICardView> implements ICardPres
         cardModel.setDate(date);
         if(!cardModel.isValidDate()) {
             getView().setDateError(R.string.default_error);
+        } else {
+            getView().setDateError(0);
         }
     }
 
@@ -43,6 +50,8 @@ public class CardPresenter extends BasePresenter<ICardView> implements ICardPres
         cardModel.setCvv(cvv);
         if(!cardModel.isValidCvv()) {
             getView().setCvvError(R.string.default_error);
+        } else {
+            getView().setCvvError(0);
         }
     }
 
@@ -65,5 +74,16 @@ public class CardPresenter extends BasePresenter<ICardView> implements ICardPres
                 setCardCvv(data);
                 break;
         }
+    }
+
+    @Override
+    public void onSend() {
+        @DecisionType int type;
+        if(cardRepository.boundCardNumber(cardModel)) {
+            type = DecisionType.CONFIRM;
+        } else {
+            type = DecisionType.CANCEL;
+        }
+        getView().openDecisionFragment(type);
     }
 }

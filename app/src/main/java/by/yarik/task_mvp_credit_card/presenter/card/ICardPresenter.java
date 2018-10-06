@@ -1,6 +1,6 @@
 package by.yarik.task_mvp_credit_card.presenter.card;
 
-import by.yarik.task_mvp_credit_card.screens.IBasePresenter;
+import by.yarik.task_mvp_credit_card.presenter.IBasePresenter;
 
 public interface ICardPresenter extends IBasePresenter {
     void setCardNumber(String number);
@@ -9,4 +9,6 @@ public interface ICardPresenter extends IBasePresenter {
     void setCardCvv(String cvv);
 
     void setCardData(int id, String data);
+
+    void onSend();
 }

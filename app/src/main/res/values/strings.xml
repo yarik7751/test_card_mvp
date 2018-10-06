@@ -7,4 +7,6 @@
     <string name="action_send_card_data">Send</string>
 
     <string name="default_error">Input error</string>
+    <string name="title_decision_ok">OK</string>
+    <string name="title_decision_cancel">cancel</string>
 </resources>

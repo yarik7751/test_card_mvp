@@ -1,4 +1,4 @@
-package by.yarik.task_mvp_credit_card.model;
+package by.yarik.task_mvp_credit_card.view.card.model;
 
 import android.text.TextUtils;
 
@@ -9,6 +9,7 @@ public class CardModel {
     private static final String HOLDER_REGEX = "\\s+";
     private static final String DATE_REGEX = "/";
     private static final int DATE_MAX_LENGTH = 5;
+    private static final int DATE_MAX_ARRAY_LENGTH = 2;
     private static final int CVV_MAX_LENGTH = 3;
 
     private String number;
@@ -69,11 +70,13 @@ public class CardModel {
     public boolean isValidDate() {
         try {
             if(TextUtils.isEmpty(date)) return false;
-
             if(date.length() > DATE_MAX_LENGTH) return false;
 
+            String[] dateArray = date.split(DATE_REGEX);
+            if(dateArray.length != DATE_MAX_ARRAY_LENGTH) return false;
+
             if(date.contains(DATE_REGEX)) {
-                int month = Integer.parseInt(date.split(DATE_REGEX)[0]);
+                int month = Integer.parseInt(dateArray[0]);
                 return month >= 1 && month <= 12;
             } else {
                 return false;

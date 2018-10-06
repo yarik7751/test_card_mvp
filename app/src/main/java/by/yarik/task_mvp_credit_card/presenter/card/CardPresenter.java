@@ -2,8 +2,8 @@ package by.yarik.task_mvp_credit_card.presenter.card;
 
 import by.yarik.task_mvp_credit_card.R;
 import by.yarik.task_mvp_credit_card.anotation.DecisionType;
-import by.yarik.task_mvp_credit_card.model.CardModel;
 import by.yarik.task_mvp_credit_card.presenter.BasePresenter;
+import by.yarik.task_mvp_credit_card.view.card.model.CardModel;
 import by.yarik.task_mvp_credit_card.view.card.ICardView;
 
 public class CardPresenter extends BasePresenter<ICardView> implements ICardPresenter {

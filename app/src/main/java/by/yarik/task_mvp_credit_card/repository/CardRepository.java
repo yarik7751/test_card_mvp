@@ -1,6 +1,6 @@
 package by.yarik.task_mvp_credit_card.repository;
 
-import by.yarik.task_mvp_credit_card.model.CardModel;
+import by.yarik.task_mvp_credit_card.view.card.model.CardModel;
 
 public class CardRepository {
 

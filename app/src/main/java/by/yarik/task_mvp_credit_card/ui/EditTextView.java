@@ -2,6 +2,8 @@ package by.yarik.task_mvp_credit_card.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -124,6 +126,9 @@ public class EditTextView extends LinearLayout {
     private void initUi(View rootView) {
         editText = rootView.findViewById(R.id.edit_text);
         errorTextView = rootView.findViewById(R.id.error_text_view);
+        if (canUseInstanceState()) {
+            editText.setId(View.generateViewId());
+        }
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -141,6 +146,30 @@ public class EditTextView extends LinearLayout {
             public void afterTextChanged(Editable editable) {
             }
         });
+    }
+
+    @Nullable
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        if (canUseInstanceState()) {
+            Parcelable superState = super.onSaveInstanceState();
+            SavedEditTextViewState savedState = new SavedEditTextViewState(superState);
+            savedState.setSavedText(editText.getText().toString());
+            return savedState;
+        } else {
+            return super.onSaveInstanceState();
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable superState) {
+        if (superState instanceof SavedEditTextViewState && canUseInstanceState()) {
+            SavedEditTextViewState savedState = (SavedEditTextViewState) superState;
+            super.onRestoreInstanceState(savedState.getSuperState());
+            editText.setText(savedState.getSavedText());
+        } else {
+            super.onRestoreInstanceState(superState);
+        }
     }
 
     protected int getLayoutId() {
@@ -185,7 +214,7 @@ public class EditTextView extends LinearLayout {
 
     public void setError(String error) {
         if(TextUtils.isEmpty(error)) {
-            errorTextView.setVisibility(GONE);
+            errorTextView.setVisibility(INVISIBLE);
             errorTextView.setText(null);
         } else {
             errorTextView.setVisibility(VISIBLE);
@@ -195,5 +224,9 @@ public class EditTextView extends LinearLayout {
 
     public void setOnTextChangeListener(OnTextChangeListener onTextChangeListener) {
         this.onTextChangeListener = onTextChangeListener;
+    }
+
+    private boolean canUseInstanceState() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
     }
 }

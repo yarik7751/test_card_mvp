@@ -101,8 +101,8 @@ public class CardFragment extends BaseFragment<ICardPresenter> implements ICardV
 
     /**
      * EditTextView.OnTextChangeListener - card data
-     * @param view
-     * @param data
+     * @param view - EditText view
+     * @param data - data from EditText views
      */
     @Override
     public void onChange(View view, String data) {

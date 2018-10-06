@@ -27,6 +27,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(onLayoutId(), container, false);
         view = onCreateViewFragment(view);
+        setRetainInstance(true);
         return view;
     }
 }

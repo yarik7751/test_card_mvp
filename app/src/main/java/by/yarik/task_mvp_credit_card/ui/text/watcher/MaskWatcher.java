@@ -27,9 +27,9 @@ public class MaskWatcher implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable editable) {
-        if (running || deleting) {
-            return;
-        }
+        if (running || deleting) return;
+        if(editable.length() == 0) return;
+
         running = true;
 
         int editableLength = editable.length();

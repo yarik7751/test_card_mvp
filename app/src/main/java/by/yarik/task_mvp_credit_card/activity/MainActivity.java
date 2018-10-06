@@ -10,8 +10,6 @@ import by.yarik.task_mvp_credit_card.view.card.CardFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    Fragment fragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,5 +7,6 @@
     <color name="default_error">#de4f4f</color>
 
     <color name="button_default">#de4f86</color>
+    <color name="button_disabled">#b7a6ac</color>
     <color name="button_click">#c10c51</color>
 </resources>

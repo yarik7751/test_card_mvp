@@ -15,4 +15,8 @@ public interface ICardView extends IBaseView {
     void setCvvError(@StringRes int error);
 
     void openDecisionFragment(@DecisionType int type);
+
+    void disableButton();
+
+    void activeButton();
 }

@@ -13,6 +13,7 @@ public class CardPresenter extends BasePresenter<ICardView> implements ICardPres
     public CardPresenter(ICardView view) {
         super(view);
         cardModel = new CardModel();
+        enabledButton();
     }
 
     @Override
@@ -73,6 +74,15 @@ public class CardPresenter extends BasePresenter<ICardView> implements ICardPres
             case R.id.et_card_cvv:
                 setCardCvv(data);
                 break;
+        }
+        enabledButton();
+    }
+
+    private void enabledButton() {
+        if(cardModel.isValid()) {
+            getView().activeButton();
+        } else {
+            getView().disableButton();
         }
     }
 

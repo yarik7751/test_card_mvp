@@ -35,8 +35,8 @@ public class CardFragment extends BaseFragment<ICardPresenter> implements ICardV
 
     @Override
     public View onCreateViewFragment(View rootView) {
-        presenter = new CardPresenter(this);
         initUi(rootView);
+        presenter = new CardPresenter(this);
         return rootView;
     }
 
@@ -64,6 +64,16 @@ public class CardFragment extends BaseFragment<ICardPresenter> implements ICardV
         etCardCvv.setOnTextChangeListener(this);
 
         cardDateMask = new CardDateMask(etCardDate.getEditText());
+    }
+
+    @Override
+    public void disableButton() {
+        btnSendCardData.setEnabled(false);
+    }
+
+    @Override
+    public void activeButton() {
+        btnSendCardData.setEnabled(true);
     }
 
     @Override

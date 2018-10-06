@@ -60,22 +60,22 @@ public class CardModel {
     }
 
     public boolean isValidNumber() {
-        return number.length() == NUMBER_VALID_LENGTH;
+        return !TextUtils.isEmpty(number) && number.length() == NUMBER_VALID_LENGTH;
     }
 
     public boolean isValidHolder() {
-        return holder.split(HOLDER_REGEX).length == HOLDER_WORLDS_COUNT;
+        return !TextUtils.isEmpty(holder) && holder.split(HOLDER_REGEX).length == HOLDER_WORLDS_COUNT;
     }
 
     public boolean isValidDate() {
         try {
-            if(TextUtils.isEmpty(date)) return false;
-            if(date.length() > DATE_MAX_LENGTH) return false;
+            if (TextUtils.isEmpty(date)) return false;
+            if (date.length() > DATE_MAX_LENGTH) return false;
 
             String[] dateArray = date.split(DATE_REGEX);
-            if(dateArray.length != DATE_MAX_ARRAY_LENGTH) return false;
+            if (dateArray.length != DATE_MAX_ARRAY_LENGTH) return false;
 
-            if(date.contains(DATE_REGEX)) {
+            if (date.contains(DATE_REGEX)) {
                 int month = Integer.parseInt(dateArray[0]);
                 return month >= 1 && month <= 12;
             } else {
@@ -87,6 +87,14 @@ public class CardModel {
     }
 
     public boolean isValidCvv() {
-        return cvv.length() == CVV_MAX_LENGTH;
+        return !TextUtils.isEmpty(cvv) && cvv.length() == CVV_MAX_LENGTH;
+    }
+
+    public boolean isValid() {
+        return
+                isValidNumber() &&
+                        isValidHolder() &&
+                        isValidDate() &&
+                        isValidCvv();
     }
 }

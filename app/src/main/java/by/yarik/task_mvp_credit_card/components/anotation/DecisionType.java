@@ -1,4 +1,4 @@
-package by.yarik.task_mvp_credit_card.anotation;
+package by.yarik.task_mvp_credit_card.components.anotation;
 
 public @interface DecisionType {
 

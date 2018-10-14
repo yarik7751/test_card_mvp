@@ -2,7 +2,7 @@ package by.yarik.task_mvp_credit_card.view.card;
 
 import android.support.annotation.StringRes;
 
-import by.yarik.task_mvp_credit_card.anotation.DecisionType;
+import by.yarik.task_mvp_credit_card.components.anotation.DecisionType;
 import by.yarik.task_mvp_credit_card.view.IBaseView;
 
 public interface ICardView extends IBaseView {

@@ -1,4 +1,4 @@
-package by.yarik.task_mvp_credit_card;
+package by.yarik.task_mvp_credit_card.components;
 
 import android.app.Application;
 

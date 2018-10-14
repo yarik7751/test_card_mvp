@@ -4,7 +4,7 @@ import android.os.Handler;
 
 import java.util.concurrent.TimeUnit;
 
-import by.yarik.task_mvp_credit_card.anotation.DecisionType;
+import by.yarik.task_mvp_credit_card.components.anotation.DecisionType;
 import by.yarik.task_mvp_credit_card.view.card.model.CardModel;
 
 public class CardRepository {

@@ -4,7 +4,8 @@ import android.os.Handler;
 import android.os.Message;
 
 import by.yarik.task_mvp_credit_card.R;
-import by.yarik.task_mvp_credit_card.anotation.DecisionType;
+import by.yarik.task_mvp_credit_card.components.anotation.DecisionType;
+import by.yarik.task_mvp_credit_card.components.utils.AndroidUtils;
 import by.yarik.task_mvp_credit_card.presenter.BasePresenter;
 import by.yarik.task_mvp_credit_card.repository.CardRepository;
 import by.yarik.task_mvp_credit_card.view.card.model.CardModel;

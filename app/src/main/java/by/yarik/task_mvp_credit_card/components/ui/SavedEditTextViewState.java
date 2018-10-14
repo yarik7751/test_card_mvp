@@ -1,4 +1,4 @@
-package by.yarik.task_mvp_credit_card.ui;
+package by.yarik.task_mvp_credit_card.components.ui;
 
 import android.os.Parcel;
 import android.os.Parcelable;

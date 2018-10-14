@@ -3,15 +3,18 @@ package by.yarik.task_mvp_credit_card.view.card;
 import android.support.annotation.StringRes;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import by.yarik.task_mvp_credit_card.R;
-import by.yarik.task_mvp_credit_card.activity.MainActivity;
+import by.yarik.task_mvp_credit_card.components.utils.AndroidUtils;
+import by.yarik.task_mvp_credit_card.components.utils.DialogUtils;
+import by.yarik.task_mvp_credit_card.view.activity.MainActivity;
 import by.yarik.task_mvp_credit_card.view.decision.DecisionFragment;
 import by.yarik.task_mvp_credit_card.presenter.card.CardPresenter;
 import by.yarik.task_mvp_credit_card.view.BaseFragment;
 import by.yarik.task_mvp_credit_card.presenter.card.ICardPresenter;
-import by.yarik.task_mvp_credit_card.ui.EditTextView;
-import by.yarik.task_mvp_credit_card.ui.text.mask.CardDateMask;
+import by.yarik.task_mvp_credit_card.components.ui.EditTextView;
+import by.yarik.task_mvp_credit_card.components.ui.text.mask.CardDateMask;
 
 public class CardFragment extends BaseFragment<ICardPresenter> implements ICardView, EditTextView.OnTextChangeListener {
 
@@ -45,7 +48,11 @@ public class CardFragment extends BaseFragment<ICardPresenter> implements ICardV
         setTextListener();
 
         btnSendCardData.setOnClickListener(view -> {
-            getPresenter().onSend();
+            if(!AndroidUtils.isNetworkOnline(getContext())) {
+                DialogUtils.showToast(getContext(), getString(R.string.no_internet_connection));
+            } else {
+                getPresenter().onSend();
+            }
         });
     }
 

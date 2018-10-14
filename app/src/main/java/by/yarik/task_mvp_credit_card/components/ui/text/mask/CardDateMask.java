@@ -1,8 +1,8 @@
-package by.yarik.task_mvp_credit_card.ui.text.mask;
+package by.yarik.task_mvp_credit_card.components.ui.text.mask;
 
 import android.widget.EditText;
 
-import by.yarik.task_mvp_credit_card.ui.text.watcher.MaskWatcher;
+import by.yarik.task_mvp_credit_card.components.ui.text.watcher.MaskWatcher;
 
 public class CardDateMask {
 

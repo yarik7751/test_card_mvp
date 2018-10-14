@@ -1,4 +1,4 @@
-package by.yarik.task_mvp_credit_card.ui.text.watcher;
+package by.yarik.task_mvp_credit_card.components.ui.text.watcher;
 
 import android.text.Editable;
 import android.text.TextWatcher;

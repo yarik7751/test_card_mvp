@@ -12,6 +12,8 @@ public class CardModel {
     private static final int DATE_MAX_ARRAY_LENGTH = 2;
     private static final int CVV_MAX_LENGTH = 3;
 
+    private static final int DIVIDER = 10;
+
     private String number;
     private String holder;
     private String date;
@@ -60,7 +62,9 @@ public class CardModel {
     }
 
     public boolean isValidNumber() {
-        return !TextUtils.isEmpty(number) && number.length() == NUMBER_VALID_LENGTH;
+        return !TextUtils.isEmpty(number) &&
+                number.length()  == NUMBER_VALID_LENGTH &&
+                checkCardNumber();
     }
 
     public boolean isValidHolder() {
@@ -96,5 +100,26 @@ public class CardModel {
                         isValidHolder() &&
                         isValidDate() &&
                         isValidCvv();
+    }
+
+    public boolean checkCardNumber() {
+        if (TextUtils.isEmpty(number) ||
+                !TextUtils.isDigitsOnly(number)) return false;
+
+        int sum = 0;
+        boolean alternate = false;
+
+        for (int i = number.length() - 1; i >= 0; i--) {
+            int n = Integer.parseInt(number.substring(i, i + 1));
+            if (alternate) {
+                n *= 2;
+                if (n > 9) {
+                    n = (n % DIVIDER) + 1;
+                }
+            }
+            sum += n;
+            alternate = !alternate;
+        }
+        return (sum % DIVIDER == 0);
     }
 }

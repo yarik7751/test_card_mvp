@@ -1,8 +1,12 @@
 package by.yarik.task_mvp_credit_card.presenter.card;
 
+import android.os.Handler;
+import android.os.Message;
+
 import by.yarik.task_mvp_credit_card.R;
 import by.yarik.task_mvp_credit_card.anotation.DecisionType;
 import by.yarik.task_mvp_credit_card.presenter.BasePresenter;
+import by.yarik.task_mvp_credit_card.repository.CardRepository;
 import by.yarik.task_mvp_credit_card.view.card.model.CardModel;
 import by.yarik.task_mvp_credit_card.view.card.ICardView;
 
@@ -88,12 +92,14 @@ public class CardPresenter extends BasePresenter<ICardView> implements ICardPres
 
     @Override
     public void onSend() {
-        @DecisionType int type;
-        if(cardRepository.boundCardNumber(cardModel)) {
-            type = DecisionType.CONFIRM;
-        } else {
-            type = DecisionType.CANCEL;
-        }
-        getView().openDecisionFragment(type);
+        getView().showProcess();
+        CardRepository.getInstance().boundCardNumber(cardModel, new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                getView().hideProcess();
+                @DecisionType int type = msg.what;
+                getView().openDecisionFragment(type);
+            }
+        });
     }
 }

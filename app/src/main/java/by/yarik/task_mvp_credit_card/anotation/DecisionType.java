@@ -4,4 +4,5 @@ public @interface DecisionType {
 
     int CONFIRM = 0;
     int CANCEL = 1;
+    int ERROR = 2;
 }

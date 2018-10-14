@@ -9,6 +9,8 @@ import by.yarik.task_mvp_credit_card.view.card.model.CardModel;
 
 public class CardRepository {
 
+    public static final String TEST_VALUE = "18";
+    public static final String FIRST_VISA_CHARSET = "4";
     private static final long REQUEST_TEST_DURATION = 5;
 
     private static CardRepository cardRepository;
@@ -19,13 +21,11 @@ public class CardRepository {
         return cardRepository;
     }
 
-    public static final String TEST_VALUE = "18";
-
     public void boundCardNumber(CardModel cardModel, Handler handler) {
         Thread thread = new Thread(() -> {
             try {
                 TimeUnit.SECONDS.sleep(REQUEST_TEST_DURATION);
-                @DecisionType int result = cardModel.getNumber().contains(TEST_VALUE) ?
+                @DecisionType int result = isVisa(cardModel.getNumber()) ?
                         DecisionType.CONFIRM :
                         DecisionType.CANCEL;
                 handler.sendEmptyMessage(result);
@@ -35,5 +35,9 @@ public class CardRepository {
             }
         });
         thread.start();
+    }
+
+    private boolean isVisa(String cardNumber) {
+        return cardNumber.substring(0, 1).equalsIgnoreCase(FIRST_VISA_CHARSET);
     }
 }

@@ -1,24 +1,26 @@
 package by.yarik.task_mvp_credit_card.presenter.card;
 
-import android.os.Handler;
 import android.os.Message;
 
 import by.yarik.task_mvp_credit_card.R;
 import by.yarik.task_mvp_credit_card.components.anotation.DecisionType;
-import by.yarik.task_mvp_credit_card.components.utils.AndroidUtils;
+import by.yarik.task_mvp_credit_card.components.pojo.BoundCardNumberResponse;
 import by.yarik.task_mvp_credit_card.presenter.BasePresenter;
-import by.yarik.task_mvp_credit_card.repository.CardRepository;
+import by.yarik.task_mvp_credit_card.repository.card.CardRepository;
+import by.yarik.task_mvp_credit_card.repository.card.ICardRepository;
 import by.yarik.task_mvp_credit_card.view.card.model.CardModel;
 import by.yarik.task_mvp_credit_card.view.card.ICardView;
 
 public class CardPresenter extends BasePresenter<ICardView> implements ICardPresenter {
 
     private CardModel cardModel;
+    private ICardRepository repository;
 
     public CardPresenter(ICardView view) {
         super(view);
         cardModel = new CardModel();
         enabledButton();
+        repository = new CardRepository(this);
     }
 
     @Override
@@ -93,14 +95,22 @@ public class CardPresenter extends BasePresenter<ICardView> implements ICardPres
 
     @Override
     public void onSend() {
+        boundCardNumber();
+    }
+
+    //---------Request---------------
+    private void boundCardNumber() {
         getView().showProcess();
-        CardRepository.getInstance().boundCardNumber(cardModel, new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                getView().hideProcess();
-                @DecisionType int type = msg.what;
-                getView().openDecisionFragment(type);
-            }
-        });
+
+        String number = cardModel.getNumber();
+        repository.boundCardNumber(number);
+    }
+
+    //-----------Responses--------------
+
+    @Override
+    public void boundCardNumberResult(BoundCardNumberResponse response) {
+        getView().hideProcess();
+        getView().openDecisionFragment(response.getResult());
     }
 }

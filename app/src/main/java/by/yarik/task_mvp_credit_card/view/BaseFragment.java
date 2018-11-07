@@ -10,9 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import by.yarik.task_mvp_credit_card.R;
+import by.yarik.task_mvp_credit_card.components.anotation.ProgressDialogState;
 import by.yarik.task_mvp_credit_card.presenter.IBasePresenter;
 
 public abstract class BaseFragment<T extends IBasePresenter> extends Fragment implements IBaseView {
+
+    private static final String PROGRESS_BAR_STATE = "PROGRESS_BAR_STATE";
 
     protected ProgressDialog progressDialog;
     protected T presenter;
@@ -33,6 +36,9 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
         setRetainInstance(true);
 
         initProgressDialog();
+        if(savedInstanceState != null && savedInstanceState.getInt(PROGRESS_BAR_STATE) == ProgressDialogState.SHOW) {
+            showProcess();
+        }
         return view;
     }
 
@@ -43,12 +49,18 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(PROGRESS_BAR_STATE, progressDialog.isShowing() ? ProgressDialogState.SHOW : ProgressDialogState.HIDE);
+    }
+
+    @Override
     public void showProcess() {
         progressDialog.show();
     }
 
     @Override
     public void hideProcess() {
-        progressDialog.dismiss();
+        progressDialog.hide();
     }
 }

@@ -63,8 +63,7 @@ public class CardModel {
 
     public boolean isValidNumber() {
         return !TextUtils.isEmpty(number) &&
-                number.length()  == NUMBER_VALID_LENGTH &&
-                checkCardNumber();
+                number.length()  == NUMBER_VALID_LENGTH;
     }
 
     public boolean isValidHolder() {
@@ -100,26 +99,5 @@ public class CardModel {
                         isValidHolder() &&
                         isValidDate() &&
                         isValidCvv();
-    }
-
-    public boolean checkCardNumber() {
-        if (TextUtils.isEmpty(number) ||
-                !TextUtils.isDigitsOnly(number)) return false;
-
-        int sum = 0;
-        boolean alternate = false;
-
-        for (int i = number.length() - 1; i >= 0; i--) {
-            int n = Integer.parseInt(number.substring(i, i + 1));
-            if (alternate) {
-                n *= 2;
-                if (n > 9) {
-                    n = (n % DIVIDER) + 1;
-                }
-            }
-            sum += n;
-            alternate = !alternate;
-        }
-        return (sum % DIVIDER == 0);
     }
 }
